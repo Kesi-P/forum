@@ -72,9 +72,23 @@
             </div>
         </nav>
 
+        @auth
+
+        <main class="py-4">
+          <ul class="list-group">
+            {{ $channels }}
+          </ul>
+            @yield('content')
+        </main>
+
+        @else
+
         <main class="py-4">
             @yield('content')
         </main>
+
+        @endauth
+
     </div>
 </body>
 </html>
