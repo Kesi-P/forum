@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
     <div id="app">
@@ -75,10 +77,23 @@
         @auth
 
         <main class="py-4">
-          <ul class="list-group">
-            {{ $channels }}
-          </ul>
-            @yield('content')
+          <div class="row">
+            <div class="col-md-4">
+              <ul class="list-group">
+                @foreach($channels as $channel)
+                <li class="list-group-item">
+                  {{ $channel->name }}
+                </li>
+                @endforeach
+              </ul>
+            </div>
+            <div class="col-md-8">
+              @yield('content')
+            </div>
+
+          </div>
+
+
         </main>
 
         @else
