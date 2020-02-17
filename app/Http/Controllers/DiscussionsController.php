@@ -52,7 +52,7 @@ class DiscussionsController extends Controller
 
         session()->flash('success', 'Discussion posted');
 
-        return redirect()->route('discussion.index');
+        return redirect()->route('discussions.index');
     }
 
     /**
@@ -63,7 +63,10 @@ class DiscussionsController extends Controller
      */
     public function show(Discussion $discussion)
     {
-        dd($discussion);
+        return view('discussions.show',[
+          'discussions' =>  $discussion
+        ]);
+        //dd($discussion);
     }
 
     /**
