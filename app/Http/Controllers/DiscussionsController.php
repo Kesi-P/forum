@@ -21,7 +21,7 @@ class DiscussionsController extends Controller
     public function index()
     {
         return view('discussions.index',[
-          'discussions' => Discussion::paginate(2)
+          'discussions' => Discussion::paginate(5)
         ]);
     }
 
@@ -51,8 +51,8 @@ class DiscussionsController extends Controller
         ]);
 
         session()->flash('success', 'Discussion posted');
-
-        return redirect()->route('discussions.index');
+        //php artisan route:list ; not the same as view
+        return redirect()->route('discussion.index');
     }
 
     /**
