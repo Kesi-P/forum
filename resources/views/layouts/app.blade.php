@@ -74,14 +74,17 @@
             </div>
         </nav>
 
-        @auth
-
+         @if(!in_array(request()->path(), ['login','register','password/email','password/reset']))
         <main class="py-4">
           <div class="row">
             <div class="col-md-4">
-
+              @auth
               <a href="{{ route('discussion.create')}}" class="btn btn-info float-right">Add Discussion</a>
               <br><br>
+              @else
+              <a href="{{ route('login')}}" class="btn btn-info float-right">Login to Add Discussion</a>
+              <br><br>
+              @endauth
             <div class="card">
               <div class="card-header">
                 Channels
@@ -106,14 +109,13 @@
 
 
         </main>
-
-        @else
-
-        <main class="py-4">
+          @else
+          <main class="container py-4">
             @yield('content')
-        </main>
+          </main>
+          @endif
 
-        @endauth
+
 
     </div>
     @yield('jssus')
