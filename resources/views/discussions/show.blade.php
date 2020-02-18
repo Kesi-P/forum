@@ -23,12 +23,21 @@
   </div>
 </div>
 
+
 @auth
 <div class="card">
   <div class="card-header">
     <p>Add Reply</p>
   </div>
   <div class="card-body">
+    @foreach ($discussions->replies()->paginate(2) as $reply)
+    <img width="20px" height="20px" style="border-radius: 50%" src="{{Gravatar::src($reply->owner->email)}}" alt="">
+    <p>{!! $reply->owner->name !!}</p>
+    <p>{!! $reply->content !!}</p>
+    <p>{!! $reply->created_at !!}</p>
+
+    @endforeach
+      {{ $discussions->replies()->paginate(2)->links() }}
     <form action="{{ route('replies.store', $discussions->slug)}}" method="POST">
       @csrf
       <input id="content" type="hidden" name="content">

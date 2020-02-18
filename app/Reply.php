@@ -8,9 +8,9 @@ class Reply extends Model
 {
 
     protected $fillable = [
-        'discussion_id'
+        'discussion_id','content'
     ];
-    
+
     public function owner()
     {
       return $this->belongsTo(User::class, 'user_id'); //find user_id in the class incase the function name is not user
