@@ -29,11 +29,11 @@
     <p>Add Reply</p>
   </div>
   <div class="card-body">
-    <form action="{{ route('replies.store', $discussions->slug)}}" method="post">
+    <form action="{{ route('replies.store', $discussions->slug)}}" method="POST">
       @csrf
-      <input type="hidden" name="reply" value="" id="reply">
-      <trix-editor input="reply"></trix-editor><br>
-      <button type="submit" name="button" class="btn btn-sm btn-primary"> Reply</button>
+      <input id="content" type="hidden" name="content">
+      <trix-editor input="content" name="content" id="content"></trix-editor>
+      <button type="submit" class="btn btn-sm btn-primary"> Reply</button>
     </form>
   </div>
 </div>
