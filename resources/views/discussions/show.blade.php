@@ -36,6 +36,14 @@
     <p>{!! $reply->content !!}</p>
     <p>{!! $reply->created_at !!}</p>
 
+    @if(auth()->user()->id === $discussions->user_id)
+    <form class="" action="{{route('discussions.best-reply', ['discussion' => $discussions->slug, 'reply' => $reply->id])}}" method="post">
+      @csrf
+      <button type="submit" name="button" class="btn btn-sm btn-primary">Mark as best</button>
+    </form>
+    <br><br>
+    @endif
+
     @endforeach
       {{ $discussions->replies()->paginate(2)->links() }}
     <form action="{{ route('replies.store', $discussions->slug)}}" method="POST">

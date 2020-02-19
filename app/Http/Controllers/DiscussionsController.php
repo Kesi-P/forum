@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\CreateDiscussionRequest;
 use App\Discussion;
+use App\Reply;
 
 class DiscussionsController extends Controller
 {
@@ -101,5 +102,13 @@ class DiscussionsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function reply(Discussion $discussion , Reply $reply) //slug, id
+    {
+      $discussion->markAsBestReply($reply);
+
+      session()->flash('success','Marked as best reply');
+      return redirect()->back();
     }
 }
