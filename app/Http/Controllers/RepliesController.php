@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateReplyRequest;
 use App\Discussion;
+use App\Notifications\NewReply;
 
 
 class RepliesController extends Controller
@@ -43,6 +44,7 @@ class RepliesController extends Controller
 
         ]);
 
+        $discussion->sus->notify(new NewReply($discussion));
         session()->flash('success','Reply added');
 
         return redirect()->back();
