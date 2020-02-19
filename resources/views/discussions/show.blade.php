@@ -19,6 +19,22 @@
       <b>{{ $discussions->title}}</b>
         <hr>
         {!! $discussions->content !!}
+        <hr>
+        @if($discussions->bestReply)
+        <div class="card text-white bg-primary" >
+          <div class="card-header">
+            <img width="20px" height="20px" style="border-radius: 50%" src="{{ Gravatar::src($discussions->bestReply->owner->email)}}" alt="">
+            Has a best reply</div>
+          <div class="card-body">
+            <p class="card-text">
+              {{$discussions->bestReply->owner->name}}
+              <hr>
+              {!! $discussions->bestReply->content !!}</p>
+          </div>
+        </div>
+
+
+        @endif
     </p>
   </div>
 </div>
