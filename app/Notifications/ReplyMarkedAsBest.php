@@ -8,16 +8,14 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Discussion;
 
-class NewReply extends Notification implements ShouldQueue
+class ReplyMarkedAsBest extends Notification
 {
     use Queueable;
     /**
-    *The reply discussion
-    *
-    * @var Discussion
-    */
+     *
+     * @var Discussion
+     */
     public $discussion;
-
     /**
      * Create a new notification instance.
      *
@@ -34,7 +32,7 @@ class NewReply extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)//where it will be sent to, and looks for tomail()
+    public function via($notifiable)
     {
         return ['mail','database'];
     }
@@ -45,13 +43,13 @@ class NewReply extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable) //mail
     {
         return (new MailMessage)
-                    ->from('test@example.com', 'Laravel Forum')
-                    ->line('A new reply was added to ypur discussion')
-                    ->action('View Discussion', route('discussion.show', $this->discussion->slug))
-                    ->line('Thank you for using our application!');
+                                  ->from('test@example.com', 'Laravel Forum')
+                                  ->line('Your reply was marked as a Best reply')
+                                  ->action('View Discussion', route('discussion.show', $this->discussion->slug))
+                                  ->line('Thank you for using our application!');
     }
 
     /**
@@ -60,10 +58,10 @@ class NewReply extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray($notifiable)//database
     {
         return [
-          'discussion' => $this->discussion
+            'discussion' => $this->discussion
         ];
     }
 }

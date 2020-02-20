@@ -10,7 +10,7 @@
         <img width="40px" height="40px" style="border-radius: 50%" src="{{ Gravatar::src($discussions->sus->email) }}" alt="">
         <span><small>{{ $discussions->sus->name}}</small></span>
       </div>
-
+  
     </div>
   </div>
 
