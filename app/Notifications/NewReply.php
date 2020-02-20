@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Discussion;
 
-class NewReply extends Notification
+class NewReply extends Notification implements ShouldQueue
 {
     use Queueable;
     /**
@@ -36,7 +36,7 @@ class NewReply extends Notification
      */
     public function via($notifiable)//where it will be sent to, and looks for tomail()
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -48,6 +48,7 @@ class NewReply extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->from('test@example.com', 'Example')
                     ->line('A new reply was added to ypur discussion')
                     ->action('View Discussion', route('discussion.show', $this->discussion->slug))
                     ->line('Thank you for using our application!');
@@ -62,7 +63,7 @@ class NewReply extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+          'discussion' => $this->discussion
         ];
     }
 }
