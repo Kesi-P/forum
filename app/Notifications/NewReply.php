@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Discussion;
 
-class NewReply extends Notification implements ShouldQueue
+class NewReply extends Notification implements ShouldQueue //make the email in the q before sending to user to save the time
 {
     use Queueable;
     /**
